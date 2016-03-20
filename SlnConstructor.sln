@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlnConstructor", "SlnConstructor.csproj", "{D04C19D1-C68E-4540-8B4B-DC59C5DB3BF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlnConstructor", "SlnConstructor\SlnConstructor.csproj", "{D04C19D1-C68E-4540-8B4B-DC59C5DB3BF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlnConstructor.Core", "..\SlnConstructor.Core\SlnConstructor.Core.csproj", "{8883557F-74F8-4488-89DE-2DEEE5D1FF9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlnConstructor.Core", "SlnConstructor.Core\SlnConstructor.Core.csproj", "{8883557F-74F8-4488-89DE-2DEEE5D1FF9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlnConstructor.Tests", "SlnConstructor.Tests\SlnConstructor.Tests.csproj", "{595F51D7-443A-4082-84A0-EB038580A08A}"
 EndProject

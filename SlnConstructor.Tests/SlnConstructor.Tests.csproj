@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SlnConstructor.Core\SlnConstructor.Core.csproj">
+    <ProjectReference Include="..\SlnConstructor.Core\SlnConstructor.Core.csproj">
       <Project>{8883557f-74f8-4488-89de-2deee5d1ff9e}</Project>
       <Name>SlnConstructor.Core</Name>
     </ProjectReference>
