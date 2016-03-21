@@ -8,7 +8,7 @@ namespace SlnConstructor
         static void Main(string[] args)
         {
             // get directory to scan from command line
-            SlnConstructor.Core.CommandLineParser parser = new SlnConstructor.Core.CommandLineParser();
+            Core.CommandLineParser parser = new Core.CommandLineParser();
             try
             {
                 parser.ParseArgs(args);

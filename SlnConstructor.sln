@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlnConstructor.Tests", "Sln
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0EC222C8-4E61-406C-8BD0-5761B333DBD7}"
 	ProjectSection(SolutionItems) = preProject
-		PreliminarySpecs.txt = PreliminarySpecs.txt
+		SlnConstructor\PreliminarySpecs.txt = SlnConstructor\PreliminarySpecs.txt
 	EndProjectSection
 EndProject
 Global
