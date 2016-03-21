@@ -7,6 +7,5 @@ Creates a single Visual Studio 2015 solution composed of all VS 2015 C# project 
 The solution includes any configuration mentioned in the project files
 The solution contains the correct dependencies between projects based on the explicit references, to assure the correct build order.
 The solution is created directly under the given directory.
-Each project file getting added to the solution is written to STDOUT .
 Error messages are written to STDERR.
  

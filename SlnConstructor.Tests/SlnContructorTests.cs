@@ -102,7 +102,7 @@ namespace SlnConstructor.Tests
             //
             string givenDir = @"F:\Temp\TestProjects";
             if (Directory.Exists(givenDir)) Directory.Delete(givenDir, true);
-            string path = Path.Combine(givenDir, "Proj2015.csproj");
+            string path = Path.Combine(givenDir, "Proj2012.csproj");
             CreateEmptyProject(path, "12.0");
             Core.ProjectCollector pc = new Core.ProjectCollector();
             //

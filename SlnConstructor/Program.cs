@@ -16,18 +16,38 @@ namespace SlnConstructor
             catch (ArgumentNullException)
             {
                 Usage();
+                Console.ReadLine();
+                return;
             }
             catch (System.IO.DirectoryNotFoundException)
             {
                 Console.Error.WriteLine("Unable to read: " + parser.dir);
-            }
-            finally
-            {
-                Console.Out.Write("Press Enter to quit");
                 Console.ReadLine();
+                return;
             }
             // scan directory for projects
+            Core.ProjectCollector pc = new Core.ProjectCollector();
+            try
+            {
+                pc.ScanDirForProjects(parser.dir, "csproj", "14.0");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                Console.ReadLine();
+                return;
+            }
+            if (pc.projects.Count == 0)
+            {
+                Console.Out.WriteLine("No project files found matching the search parameters");
+                Console.ReadLine();
+                return;
+            }
+            Console.Out.WriteLine("Found {0} project files",pc.projects.Count);
             // construct the solution from projects
+            // All done
+            Console.ReadLine();
+            return;
         }
 
         private static void Usage()

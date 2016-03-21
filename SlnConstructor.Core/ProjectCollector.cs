@@ -18,7 +18,7 @@ namespace SlnConstructor.Core
             }
         }
 
-        internal void ScanDirForProjects(string givenDir, string extension, string toolsVersion)
+        public void ScanDirForProjects(string givenDir, string extension, string toolsVersion)
         {
             projects = new StringCollection();
             DirectoryInfo di = new DirectoryInfo(givenDir);
