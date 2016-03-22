@@ -32,6 +32,8 @@ namespace SlnConstructor.Core
 
         internal bool ProjectVersionMatch(string path, string toolsVersion)
         {
+            if (!File.Exists(path))
+                throw new FileNotFoundException();
             var root = ProjectRootElement.Open(path);
             return (root.ToolsVersion == toolsVersion);
         }

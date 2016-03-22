@@ -110,7 +110,31 @@ namespace SlnConstructor.Tests
             //
             Assert.IsFalse(res);
         }
-        // TODO: test exception if project is not well-formed
+        [TestMethod]
+        [ExpectedException(typeof(Microsoft.Build.Exceptions.InvalidProjectFileException))]
+        public void ProjectCollector_ExceptionIfProjectFileMalformed()
+        {
+            string givenDir = @"F:\Temp\TestProjects";
+            if (Directory.Exists(givenDir)) Directory.Delete(givenDir, true);
+            string path = Path.Combine(givenDir, "Proj2015.csproj");
+            Core.ProjectCollector pc = new Core.ProjectCollector();
+            Directory.CreateDirectory(givenDir);
+            using (TextWriter fs = File.CreateText(path))
+                fs.Write("not a csproj");
+            pc.ProjectVersionMatch(path, "14.0");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(System.IO.FileNotFoundException))]
+        public void ProjectCollector_ExceptionIfProjectFileMissing()
+        {
+            string givenDir = @"F:\Temp\TestProjects";
+            if (Directory.Exists(givenDir)) Directory.Delete(givenDir, true);
+            string path = Path.Combine(givenDir, "Proj2015.csproj");
+            Core.ProjectCollector pc = new Core.ProjectCollector();
+            Directory.CreateDirectory(givenDir);
+            pc.ProjectVersionMatch(path, "14.0");
+        }
+
         private void CreateEmptyProject(string path,string version)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path));
