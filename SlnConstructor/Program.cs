@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
+using System.IO;
 
 namespace SlnConstructor
 {
@@ -29,7 +29,7 @@ namespace SlnConstructor
             Core.ProjectCollector pc = new Core.ProjectCollector();
             try
             {
-                pc.ScanDirForProjects(parser.dir, "csproj", "14.0");
+                pc.ScanDirForProjects(parser.dir, "csproj", "4.0");
             }
             catch (Exception ex)
             {
@@ -45,6 +45,8 @@ namespace SlnConstructor
             }
             Console.Out.WriteLine("Found {0} project files",pc.projects.Count);
             // construct the solution from projects
+            Core.SlnBuilder sb = new Core.SlnBuilder();
+            sb.WriteSolution(Path.Combine(parser.dir,"general.sln"));
             // All done
             Console.ReadLine();
             return;

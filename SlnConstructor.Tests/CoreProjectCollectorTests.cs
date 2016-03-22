@@ -41,10 +41,28 @@ namespace SlnConstructor.Tests
             StringCollection projects = new StringCollection();
             projects.Add(Path.Combine(givenDir, "Proj2015.csproj"));
             CreateEmptyProject(Path.Combine(givenDir, "Proj2015.csproj"), "14.0");
-            CreateEmptyProject(Path.Combine(givenDir, "Proj2012.csproj"), "12.0");
+            CreateEmptyProject(Path.Combine(givenDir, "Proj2012.csproj"), "4.0");
             Core.ProjectCollector pc = new Core.ProjectCollector();
             // run
             pc.ScanDirForProjects(givenDir, "csproj", "14.0");
+            // check pass/fail criteria
+            CollectionAssert.AreEquivalent(projects, pc.projects);
+            // tear down
+            Directory.Delete(givenDir, true);
+        }
+        public void ProjectCollector_FindOnlyVS2012Projects()
+        {
+            // TODO: unify with vs2015 test
+            // set up
+            string givenDir = @"F:\Temp\TestProjects";
+            if (Directory.Exists(givenDir)) Directory.Delete(givenDir, true);
+            StringCollection projects = new StringCollection();
+            projects.Add(Path.Combine(givenDir, "Proj2015.csproj"));
+            CreateEmptyProject(Path.Combine(givenDir, "Proj2015.csproj"), "14.0");
+            CreateEmptyProject(Path.Combine(givenDir, "Proj2012.csproj"), "4.0");
+            Core.ProjectCollector pc = new Core.ProjectCollector();
+            // run
+            pc.ScanDirForProjects(givenDir, "csproj", "4.0");
             // check pass/fail criteria
             CollectionAssert.AreEquivalent(projects, pc.projects);
             // tear down
