@@ -1,46 +1,13 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Specialized;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Build.Construction;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SlnConstructor.Tests
 {
     [TestClass]
-    public class SlnContructorTests
+    public class CoreProjectCollectorTests
     {
-        [TestMethod]
-        public void CommandLineParser_ReturnCorrectDir()
-        {
-            // set up
-            string givenDir = "TestProjects";
-            Directory.CreateDirectory(givenDir);
-            string[] args = { givenDir };
-            Core.CommandLineParser parser = new Core.CommandLineParser();
-            // run
-            parser.ParseArgs(args);
-            // check pass/fail criteria
-            Assert.AreEqual(parser.dir, givenDir);
-            // tear down
-            Directory.Delete(givenDir,true);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CommandLineParser_ExceptionIfNoDirProvided()
-        {
-            string[] args = { };
-            Core.CommandLineParser parser = new Core.CommandLineParser();
-            parser.ParseArgs(args);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(System.IO.DirectoryNotFoundException))]
-        public void CommandLineParser_ExceptionIfDirNotFound()
-        {
-            string givenDir = "projects";
-            string[] args = { givenDir };
-            Core.CommandLineParser parser = new Core.CommandLineParser();
-            parser.ParseArgs(args);
-        }
         [TestMethod]
         public void ProjectCollector_FindAllProjects()
         {
@@ -55,7 +22,7 @@ namespace SlnConstructor.Tests
             projects.Add(givenDir + "\\Other\\MyProj\\MyOtherProj.csproj");
             foreach (string prj in projects)
             {
-                CreateEmptyProject(prj,"14.0");
+                CreateEmptyProject(prj, "14.0");
             }
             Core.ProjectCollector pc = new Core.ProjectCollector();
             // run
@@ -63,7 +30,7 @@ namespace SlnConstructor.Tests
             // check pass/fail criteria
             CollectionAssert.AreEquivalent(projects, pc.projects);
             // tear down
-            Directory.Delete(givenDir,true);
+            Directory.Delete(givenDir, true);
         }
         [TestMethod]
         public void ProjectCollector_FindOnlyVS2015Projects()
@@ -73,11 +40,11 @@ namespace SlnConstructor.Tests
             if (Directory.Exists(givenDir)) Directory.Delete(givenDir, true);
             StringCollection projects = new StringCollection();
             projects.Add(Path.Combine(givenDir, "Proj2015.csproj"));
-            CreateEmptyProject(Path.Combine(givenDir, "Proj2015.csproj"),"14.0");
+            CreateEmptyProject(Path.Combine(givenDir, "Proj2015.csproj"), "14.0");
             CreateEmptyProject(Path.Combine(givenDir, "Proj2012.csproj"), "12.0");
             Core.ProjectCollector pc = new Core.ProjectCollector();
             // run
-            pc.ScanDirForProjects(givenDir, "csproj","14.0");
+            pc.ScanDirForProjects(givenDir, "csproj", "14.0");
             // check pass/fail criteria
             CollectionAssert.AreEquivalent(projects, pc.projects);
             // tear down
@@ -114,7 +81,7 @@ namespace SlnConstructor.Tests
         [ExpectedException(typeof(Microsoft.Build.Exceptions.InvalidProjectFileException))]
         public void ProjectCollector_ExceptionIfProjectFileMalformed()
         {
-            string givenDir = @"F:\Temp\TestProjects";
+            string givenDir = @"F:\Temp\BadProjects";
             if (Directory.Exists(givenDir)) Directory.Delete(givenDir, true);
             string path = Path.Combine(givenDir, "Proj2015.csproj");
             Core.ProjectCollector pc = new Core.ProjectCollector();
@@ -134,8 +101,7 @@ namespace SlnConstructor.Tests
             Directory.CreateDirectory(givenDir);
             pc.ProjectVersionMatch(path, "14.0");
         }
-
-        private void CreateEmptyProject(string path,string version)
+        private void CreateEmptyProject(string path, string version)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             var root = ProjectRootElement.Create();
@@ -165,6 +131,6 @@ namespace SlnConstructor.Tests
                 group.AddItem(groupName, item);
             }
         }
-    }
 
+    }
 }
